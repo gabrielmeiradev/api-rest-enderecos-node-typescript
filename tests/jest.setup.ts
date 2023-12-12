@@ -4,9 +4,13 @@ import { Knex } from "../src/server/database/knex";
 
 import { server } from "../src/server/server";
 
+beforeAll(async () => {
+    await Knex.migrate.latest();
+})
 
 afterAll(async () => {
-    console.log("ola");
+    await Knex.destroy();
 })
 
 export const testServer = supertest(server);
+
